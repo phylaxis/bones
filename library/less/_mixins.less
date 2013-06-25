@@ -20,25 +20,25 @@ remember less is more.
 CLEARFIXIN'
 *********************/
 
-/* Contain floats: nicolasgallagher.com/micro-clearfix-hack/ */ 
-.clearfix { 
-	&:before,
-	&:after {
-		content: "";
-    	display: table;
-	}
-	&:after {
-		clear: both;
-	}
-	/* for IE */
-	zoom: 1; 
+// Contain floats: nicolasgallagher.com/micro-clearfix-hack/
+.clearfix {
+  zoom: 1;
+	&:before, &:after { content: ""; display: table; }
+	&:after { clear: both; }
 }
 
 /*********************
 TOOLS
 *********************/
 
-/* http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/ */
+// BORDER-BOX ALL THE THINGS! (http://paulirish.com/2012/box-sizing-border-box-ftw/)
+* { 
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing:    border-box; 
+	box-sizing:         border-box; 
+}
+
+// http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement/ 
 .image-replacement {
 	text-indent: 100%;
 	white-space: nowrap;
@@ -51,16 +51,26 @@ Need help w/ choosing your colors? Try this site out:
 http://0to255.com/
 *********************/
 
-@alert-yellow:            #ebe16f;
-@alert-red:               #fbe3e4;
-@alert-green:             #e6efc2;
-@alert-blue:              #d5edf8;
+@alert-yellow:      #ebe16f;
+@alert-red:         #fbe3e4;
+@alert-green:       #e6efc2;
+@alert-blue:        #d5edf8;
 
 @black:             #000;
 @white:             #fff;
 
 @bones-pink:        #f01d4f;
 @bones-blue:        #1990db;
+
+@link-color:        @bones-pink;
+@link-hover:        darken(@link-color, 9%);
+
+/*
+Here's a great tutorial on how to
+use color variables properly:
+http://sachagreif.com/sass-color-variables/
+*/
+
 
 /*********************
 TYPOGRAPHY
@@ -105,101 +115,72 @@ span.amp {
 .text-right  { text-align: right; }
 
 
-/* alerts & notices */
-.alert { 
-	margin: 10px; 
-	padding: 5px 18px; 
-	border: 1px solid; 
+// alerts and notices
+.alert {
+	margin: 10px;
+	padding: 5px 18px;
+	border: 1px solid;
 }
 
-.help { 
-	border-color: darken(@alert-yellow, 5%); 
-	background: @alert-yellow; 
+.alert-help {
+  .alert();
+	border-color: darken(@alert-yellow, 5%);
+	background: @alert-yellow;
 }
 
-.info { 
-	border-color: darken(@alert-blue, 5%); 
-	background: @alert-blue; 
+.alert-info {
+  .alert();
+	border-color: darken(@alert-blue, 5%);
+	background: @alert-blue;
 }
 
-.error { 
-	border-color: darken(@alert-red, 5%); 
-	background: @alert-red; 
+.alert-error {
+  .alert();
+	border-color: darken(@alert-red, 5%);
+	background: @alert-red;
 }
 
-.success { 
-	border-color: darken(@alert-green, 5%); 
-	background: @alert-green; 
-} 
+.alert-success {
+  .alert();
+	border-color: darken(@alert-green, 5%);
+	background: @alert-green;
+}
 
 /*********************
 BORDER RADIUS
 *********************/
 
-/* .rounded(4px); */
-/* NOTE: For older browser support (and some mobile), don't use the shorthand to define *different* corners. */
-.rounded(@radius: 4px) {
+/* 
+NOTE: For older browser support (and some mobile), 
+don't use the shorthand to define *different* corners. 
+
+USAGE: .border-radius(4px); 
+
+*/
+.border-radius(@radius: 4px) {
   -webkit-border-radius: @radius;
      -moz-border-radius: @radius;
           border-radius: @radius;
 }
 
-/* .rounded-left(4px); */
-.rounded-left(@radius: 4px) {
-	-webkit-border-bottom-left-radius: @radius;
-  	 -webkit-border-top-left-radius: @radius;
-			-moz-border-radius-bottomleft: @radius;
-		   	 -moz-border-radius-topleft: @radius;
-					border-bottom-left-radius: @radius;
-			   		 border-top-left-radius: @radius;
-}
-
-/* .rounded-right(4px); */
-.rounded-right(@radius: 4px) {
-	-webkit-border-bottom-right-radius: @radius;
-  	 -webkit-border-top-right-radius: @radius;
-			-moz-border-radius-bottomright: @radius;
-		   	 -moz-border-radius-topright: @radius;
-					border-bottom-right-radius: @radius;
-			   		 border-top-right-radius: @radius;
-}
-
-/* .rounded-bottom(4px); */
-.rounded-bottom(@radius: 4px) {
-	-webkit-border-bottom-right-radius: @radius;
-	 -webkit-border-bottom-left-radius: @radius;
-	    -moz-border-radius-bottomright: @radius;
-	     -moz-border-radius-bottomleft: @radius;
-	        border-bottom-right-radius: @radius;
-	         border-bottom-left-radius: @radius;
-}
-
-/* .rounded-top(4px); */
-.rounded-top(@radius: 4px) {
-	-webkit-border-top-right-radius: @radius;
-	 -webkit-border-top-left-radius: @radius;
-	    -moz-border-radius-topright: @radius;
-	     -moz-border-radius-topleft: @radius;
-	        border-top-right-radius: @radius;
-	         border-top-left-radius: @radius;
-}
 
 /*********************
 TRANISTION
 *********************/
 
 /* .transition(all,2s); */
-.transition(@what: all, @time: 0.2s) {
-	-webkit-transition: @what @time ease-out;
-	   -moz-transition: @what @time ease-out;
-	     -o-transition: @what @time ease-out;
-	        transition: @what @time ease-out;
+.transition(@what: all, @time: 0.2s, @transition: ease-in-out) {
+	-webkit-transition: @what @time @transition;
+	-moz-transition:    @what @time @transition;
+	-ms-transition:     @what @time @transition;
+	-o-transition:      @what @time @transition;
+	transition:         @what @time @transition;
 }
 
 /*********************
 CSS3 GRADIENTS
 Be careful with these since they can 
-really slow down your CSS. Don't overdue it.
+really slow down your CSS. Don't overdo it.
 *********************/
 
 /* .css-gradient(#dfdfdf,#f8f8f8); */
@@ -213,28 +194,20 @@ really slow down your CSS. Don't overdue it.
 }
 
 /*********************
-BOX SIZING
-*********************/
-
-/* .boxSizing(border-box); */
-/* NOTE: value of "padding-box" is only supported in Gecko. So 
-probably best not to use it. I mean, were you going to anyway? */
-.boxSizing(@type: border-box) {
-	-webkit-box-sizing: @type;
-	   -moz-box-sizing: @type;
-			-ms-box-sizing: @type;
-					box-sizing: @type;
-}
-
-/*********************
 BOX SHADOW
 *********************/
 
-/* .boxShadow(0 0 4px #444); */
-.boxShadow(@x: 0, @y: 0, @radius: 4px, @spread: 0, @color: rgba(0,0,0,0.5)) {
+/* .boxShadow(0,0,4px,0,#444); */
+.boxShadow(@x: 0, @y: 0, @radius: 4px, @spread: 0, @color: rgba(0,0,0,0.5)) when (isnumber(@x)) {
 	-webkit-box-shadow: @x @y @radius @spread @color;
 	   -moz-box-shadow: @x @y @radius @spread @color;
-					box-shadow: @x @y @radius @spread @color; 
+			box-shadow: @x @y @radius @spread @color; 
+}
+/* .boxShadow(none); */
+.boxShadow(@x: none) when (iskeyword(@x)) {
+	-webkit-box-shadow: @x;
+	   -moz-box-shadow: @x;
+			box-shadow: @x; 
 }
 
 /*********************
@@ -256,13 +229,13 @@ BUTTONS
 	margin-bottom: 20px;
 	line-height: 21px;
 	.transition();
-	.rounded(4px);
+	.border-radius(4px);
 	.css-gradient(@bones-pink,darken(@bones-pink, 5%));
 
 	&:hover, &:focus {
 		color: @white;
-	  	border: 1px solid darken(@bones-pink, 13%);
-	  	border-top-color: darken(@bones-pink, 20%);
+	  border: 1px solid darken(@bones-pink, 13%);
+	  border-top-color: darken(@bones-pink, 20%);
 	 	border-left-color: darken(@bones-pink, 20%);
 		.css-gradient(darken(@bones-pink, 5%),darken(@bones-pink, 10%));
 	}
