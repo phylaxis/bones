@@ -9,44 +9,24 @@ loaded by mobile devices. You want to keep it as minimal as
 possible. This is called at the top of the main stylsheet
 and will be used across all viewports.
 
------------- MAP ------------
-
-01. GENERAL STYLES
-02. WORDPRESS BODY CLASSES
-03. LAYOUT & GRID STYLES
-04. LINK STYLES
-05. H1, H2, H3, H4, H5 STYLES
-06. HEADER STYLES
-07. NAVIGATION STYLES
-08. POSTS & CONTENT STYLES
-09. PAGE NAVI STYLES
-10. COMMENT STYLES
-11. COMMENT FORM STYLES
-12. SIDEBARS & ASIDES
-13. FOOTER STYLES
-
 ******************************************************************/
 
-
-
-
 /*********************
-01. GENERAL STYLES
+GENERAL STYLES
 *********************/
 
-html, body {
-	/* height: 100%; */
-}
 body {
-	font-family: @serif;
+	font-family: $lato;
 	font-size: 100%;
 	line-height: 1.5;
-	color: #565656;
+	color: $text-color;
+	background-color: $gray;
+  -webkit-font-smoothing: antialiased;
 }
 
 /********************
-02. WORDPRESS BODY CLASSES
-    style a page via class
+WORDPRESS BODY CLASSES
+style a page via class
 ********************/
 
 .rtl {}                           /* for sites that are read right to left (i.e. hebrew) */
@@ -86,25 +66,24 @@ body {
 	.paged-1 {}                     /* individual paged (i.e. body.paged-3) */
 
 /*********************
-03. LAYOUT & GRID STYLES
+LAYOUT & GRID STYLES
 *********************/
 
 .wrap {
 	width: 96%;
 	margin: 0 auto;
 }
-#container {}
 
 /*********************
-04. LINK STYLES
+LINK STYLES
 *********************/
 
 a, a:visited {
-	color: @link-color;
+	color: $link-color;
 
 	/* on hover */
 	&:hover, &:focus {
-		color: @link-hover;
+		color: $link-hover;
 	}
 
 	/* on click */
@@ -124,13 +103,12 @@ a, a:visited {
 }
 
 /******************************************************************
-05. H1, H2, H3, H4, H5 STYLES
+H1, H2, H3, H4, H5 STYLES
 ******************************************************************/
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
-	font-family: @sans-serif;
 	text-rendering: optimizelegibility;
-	font-weight: 400;
+	font-weight: 500;
 	/*
 	if you're going to use webfonts, be sure to check your weights
 	http://css-tricks.com/watch-your-font-weight/
@@ -170,31 +148,23 @@ h5, .h5 {
 }
 
 /*********************
-06. HEADER STYLES
+HEADER STYLES
 *********************/
 
 .header {
-	#inner-header {}
-
-	#logo {}
-	
-	nav {
-		div.top-nav {
-			ul {
-				li {	
-					a {}
-	
-					&:first-child {}
-	
-					&:last-child {}
-				}
-			}
-		}
-	}
+	background-color: $black;
 }
 
+	#logo {
+		margin: 0.75em 0;
+
+		a {
+			color: $white;
+		}
+	}
+
 /*********************
-07. NAVIGATION STYLES
+NAVIGATION STYLES
 *********************/
 
 /*
@@ -206,17 +176,16 @@ and more scalable.
 */
 
 .nav {
-	border: 1px solid #ccc;
 	border-bottom: 0;
+	margin: 0;
 
 	li {
 
 		a {
 			display: block;
+			color: $white;
 			text-decoration: none;
-			padding: 10px 10px;
-			background-color: #eee;
-			border-bottom: 1px solid #ccc;
+			padding: 0.75em;
 
 			/*
 			remember this is for mobile ONLY, so there's no need
@@ -278,31 +247,48 @@ and more scalable.
 
 
 /*********************
-08. POSTS & CONTENT STYLES
+POSTS & CONTENT STYLES
 *********************/
 
 #content {
-	margin-top: 2.2em;
-
-	#inner-content {}
+	margin-top: 1.5em;
 }
 
 		.hentry {
+			background-color: $white;
+			border-radius: 3px;
+			margin-bottom: 1.5em;
+			border: 1px solid $border-color;
 
-			header {}
+			header {
+				border-bottom: 1px solid $light-gray;
+				padding: 1.5em;
+			}
 
-			footer {}
+			footer {
+				padding: 1.5em;
+				border-top: 1px solid $light-gray;
+
+				p {
+					margin: 0;
+				}
+			}
 
 		} /* end .hentry */
 
 		.single-title,
-		.page-title {}
+		.page-title,
+		.entry-title {
+			margin: 0;
+		}
 
 		.single-title {}
 
 		.page-title {}
 
-		.archive-title { }
+		.entry-title {}
+
+		.archive-title {}
 
 		/* want to style individual post classes? Booya! */
 		.post-id {}         /* post by id (i.e. post-3) */
@@ -316,15 +302,20 @@ and more scalable.
 
 		/* post meta */
 		.byline {
-			color: #999;
+			color: $meta-gray;
+			font-style: italic;
+			margin: 0;
 
 			time {}
 		}
 
 		/* entry content */
 		.entry-content {
+			padding: 1.5em 1.5em 0;
 
-			p {}
+			p {
+				margin: 0 0 1.5em;
+			}
 
 
 			ul, ol, table, dl {}
@@ -347,7 +338,53 @@ and more scalable.
 
 			}
 
+			table {
+				width: 100%;
+				border: 1px solid $gray;
+				margin-bottom: 1.5em;
+
+				caption {
+					margin: 0 0 7px;
+					font-size: 0.75em;
+					color: $meta-gray;
+					text-transform: uppercase;
+					letter-spacing: 1px;
+				}
+			}
+
+			tr {
+				border-bottom: 1px solid $gray;
+
+				&:nth-child(even) {
+					background-color: $light-gray;
+				}
+			}
+
+			td {
+				padding: 7px;
+				border-right: 1px solid $gray;
+
+				&:last-child {
+					border-right: 0;
+				}
+			}
+
+			th {
+				background-color: $light-gray;
+				border-bottom: 1px solid $gray;
+				border-right: 1px solid $gray;
+
+				&:last-child {
+					border-right: 0;
+				}
+			}
+
 			blockquote {
+				margin: 0 0 1.5em 0.75em;
+				padding: 0 0 0 0.75em;
+				border-left: 3px solid $blue;
+				font-style: italic;
+				color: $meta-gray;
 
 				&:before {}
 
@@ -380,15 +417,22 @@ and more scalable.
 			.alignright, img.alignright {}
 			.aligncenter, img.aligncenter {}
 
-			video, object {
+			.size-auto,
+			.size-full,
+			.size-large,
+			.size-medium,
+			.size-thumbnail {
 				max-width: 100%;
 				height: auto;
 			}
 
 			pre {
-				background: #eee;
-				border: 1px solid #cecece;
-				padding: 10px;
+				background: $black;
+				color: $light-gray;
+				font-size: 0.9em;
+				padding: 1.5em;
+				margin: 0 0 1.5em;
+				border-radius: 3px;
 			}
 
 		} /* end .entry-content */
@@ -438,101 +482,69 @@ and more scalable.
 		.size-medium {}
 		.size-thumbnail {}
 
+	// the tag output
+	.tags {
+		margin: 0;
+	}
+
 /******************************************************************
-09. PAGE NAVI STYLES
+PAGE NAVI STYLES
 ******************************************************************/
 
-.page-navigation,
+.pagination,
 .wp-prev-next {
-	margin: 1.1em 0 2.2em;
+	margin: 1.5em 0;
 }
-	.bones_page_navi {
+	.pagination{
+    text-align: center;
 
-		li {
-			float: left;
-			margin-left: 10px;
+    ul {
+      display: inline-block;
+      background-color: $white;
+      white-space: nowrap;
+      padding: 0;
+      clear: both;
+      border-radius: 3px;
+    }
 
-			a {
-				padding: 3px 6px;
-				display: block;
-				text-decoration: none;
-				position: relative;
+    li {
+      padding: 0;
+      margin: 0;
+      float: left;
+      display: inline;
+      overflow: hidden;
+      border-right: 1px solid $gray;
+    }
 
-				&:hover,
-				&:focus {
-					color: #f01d4f;
-					text-decoration: underline;
-				}
-			}
+    a, span {
+      margin: 0;
+      text-decoration: none;
+      padding: 0;
+      line-height: 1em;
+      font-size: 1em;
+      font-weight: normal;
+      padding: 0.75em;
+      min-width: 1em;
+      display: block;
+      color: $blue;
 
-		}
+      &:hover, &:focus {
+      	background-color: $blue;
+      	color: $white;
+      }
+    }
 
-		/* current page link */
-		li.bpn-current {
-			padding: 3px 6px;
-			border-bottom: 2px solid #f01d4f;
-			position: relative;
+    .current{
+    	cursor: default;
+    	color: $text-color;
 
-			a {
-				/* hovering on current page link */
-				&:hover,
-				&:focus {}
+    	&:hover, &:focus {
+    		background-color: $white;
+    		color: $text-color;
+    	}
+    }
 
-			}
-
-		} /* end .bones_page_navi .bpn-current */
-
-		/* common styles for page-navi links */
-		li.bpn-prev-link,
-		li.bpn-next-link {
-			font-weight: 700;
-
-			a {
-				padding: 0;
-			}
-		}
-
-		/* remove the bg on end links */
-		li.bpn-prev-link a:hover,
-		li.bpn-next-link a:hover,
-		li.bpn-first-page-link a:hover,
-		li.bpn-last-page-link a:hover {
-			background: none;
-		}
-
-		/* previous link */
-		li.bpn-prev-link {
-			a {
-				&:hover,
-				&:focus {}
-			}
-		}
-
-		/* next page link */
-		li.bpn-next-link {
-			a {
-				&:hover,
-				&:focus {}
-			}
-		}
-
-		/* first page link */
-		li.bpn-first-page-link {
-			a {
-				&:hover,
-				&:focus {}
-			}
-		}
-
-		/* last page link */
-		li.bpn-last-page-link {
-			a {
-				&:hover,
-				&:focus {}
-			}
-		}
-
-	} /* end .bones_page_navi */
+  } /* end .bones_page_navi */
 
 	/* fallback previous & next links */
 	.wp-prev-next {
@@ -550,11 +562,14 @@ and more scalable.
 	} /* end .wp-prev-next */
 
 /******************************************************************
-10. COMMENT STYLES
+COMMENT STYLES
 ******************************************************************/
 
 /* h3 comment title */
-#comments {
+#comments-title {
+	padding: 0.75em;
+	margin: 0;
+	border-top: 1px solid $light-gray;
 
 	/* number of comments span */
 	span {}
@@ -572,76 +587,21 @@ and more scalable.
 
 
 .commentlist {
+	margin: 0;
+	list-style-type: none;
+}
 
-	li {
-		position: relative;
-		clear: both;
-		overflow: hidden;
-		list-style-type: none;
-		margin-bottom: 1.5em;
-		padding: 0.7335em 10px;
+.comment {
+	position: relative;
+	clear: both;
+	overflow: hidden;
+	padding: 1.5em;
+	border-bottom: 1px solid $light-gray;
 
-		&:last-child {
-			margin-bottom: 0;
-		}
-
-		ul.children {
-			margin: 0;
-
-			li {}
-
-			/* variations */
-			.comment {}
-			.alt {}
-			.odd {}
-			.even {}
-			.depth-1 {}           /* change number for different depth */
-			.byuser {}
-			.bypostauthor {}
-			.comment-author-admin {}
-
-		} /* end .commentlist li ul.children */
+	.comment-author {
+		padding: 7px;
+		border: 0;
 	}
-
-	li[class*=depth-] {
-		margin-top: 1.1em;
-	}
-
-	li.depth-1 {
-		margin-left: 0;
-		margin-top: 0;
-	}
-
-	li:not(.depth-1) {
-		margin-right: -10px;
-		margin-left: -10px;
-		margin-top: 0;
-		padding-bottom: 0;
-	}
-
-	li.depth-2 {}
-	li.depth-3 {}
-	li.depth-4 {}
-	li.depth-5 {}
-
-	/* general comment classes */
-	.alt {}
-	.odd {
-		background: #eee;
-	}
-	.even {
-		background: #fefefe;
-	}
-	.parent {}
-	.comment {}
-	.children {}
-	.pingback {}
-	.bypostauthor {}
-	.comment-author {}
-	.comment-author-admin {}
-	.thread-alt {}
-	.thread-odd {}
-	.thread-even {}
 
 	/* vcard */
 	.vcard {
@@ -656,10 +616,12 @@ and more scalable.
 		}
 
 		time {
-			float: right;
+			display: block;
+			font-size: 0.9em;
+			font-style: italic;
 
 			a {
-				color: #999;
+				color: $meta-gray;
 				text-decoration: none;
 
 				&:hover {
@@ -670,17 +632,79 @@ and more scalable.
 
 		}
 
-		img.photo {}
+		.photo {}
 
-		img.avatar {
+		.avatar {
 			position: absolute;
-			left: 10px;
-			padding: 2px;
-			border: 1px solid #cecece;
-			background: #fff;
+			left: 16px;
+			border-radius: 50%;
 		}
 
 	} /* end .commentlist .vcard */
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+
+	.children {
+		margin: 0;
+
+		li {}
+
+			/* variations */
+			.comment {}
+			.alt {}
+			.odd {}
+			.even {}
+			.depth-1 {}           /* change number for different depth */
+			.byuser {}
+			.bypostauthor {}
+			.comment-author-admin {}
+
+	} /* end children */
+
+
+	&[class*=depth-] {
+		margin-top: 1.1em;
+	}
+
+	&.depth-1 {
+		margin-left: 0;
+		margin-top: 0;
+	}
+
+	&:not(.depth-1) {
+		margin-top: 0;
+		margin-left: 7px;
+		padding: 7px;
+	}
+
+	&.depth-2 {}
+	&.depth-3 {}
+	&.depth-4 {}
+	&.depth-5 {}
+
+	/* general comment classes */
+	&.alt {}
+	&.odd {
+		background-color: $white;
+	}
+	&.even {
+		background: $light-gray;
+	}
+	&.parent {}
+	&.comment {}
+	&.children {}
+	&.pingback {}
+	&.bypostauthor {}
+	&.comment-author {}
+	&.comment-author-admin {}
+	&.thread-alt {}
+	&.thread-odd {}
+	&.thread-even {}
+}
+
+
 
 
 	/* comment meta */
@@ -698,7 +722,6 @@ and more scalable.
 
 	/* comment content */
 	.comment_content {
-		margin-left: 50px;
 
 		p {
 			margin: 0.7335em 0 1.5em;
@@ -710,90 +733,66 @@ and more scalable.
 
 	/* comment reply link */
 	.comment-reply-link {
-		text-decoration: none;
-		float: right;
-		background: #4598bb;
-		padding: 3px 5px;
-		color: #fff;
-		opacity: 0.65;
-		margin-bottom: 10px;
-		font-weight: 700;
+		@extend .blue-btn;
 		font-size: 0.9em;
+		float: right;
 
 		&:hover,
 		&:focus {
-			opacity: 1;
 		}
 
 	} /* end .commentlist .comment-reply-link */
 
-} /* end .commentlist */
+	/* edit comment link */
+	.comment-edit-link {
+		font-style: italic;
+		margin: 0 7px;
+		text-decoration: none;
+		font-size: 0.9em;
+	}
+
+
 
 /******************************************************************
-11. COMMENT FORM STYLES
+COMMENT FORM STYLES
 ******************************************************************/
 
-.respond-form {
-	margin: 1.5em 10px;
-	padding-bottom: 2.2em;
-
-	form {
-		margin: 0.75em 0;
-
-		li {
-			list-style-type: none;
-			clear: both;
-			margin-bottom: 0.7335em;
-
-			label,
-			small {
-				display: none;
-			}
-		}
-
-		input[type=text],
-		input[type=email],
-		input[type=url],
-		textarea {
-			padding: 3px 6px;
-			background: #efefef;
-			border: 2px solid #cecece;
-			line-height: 1.5em;
-
-			&:focus {
-				background: #fff;
-			}
-
-			/* form validation */
-			&:invalid {
-				outline: none;
-				border-color: #fbc2c4;
-				background-color: #f6e7eb;
-				-webkit-box-shadow: none;
-				   -moz-box-shadow: none;
-				    -ms-box-shadow: none;
-						box-shadow: none;
-			}
-		}
-
-		input[type=text],
-		input[type=email],
-		input[type=url] {
-			max-width: 400px;
-			min-width: 250px;
-		}
-
-		textarea {
-			resize: none;
-			width: 97.3%;
-			height: 150px;
-		}
-
-	}
+.comment-respond {
+	@extend .cf;
+	padding: 1.5em;
+	border-top: 1px solid $light-gray;
 }
 
+	#reply-title {
+		margin: 0;
+	}
+
+	.logged-in-as {
+		color: $meta-gray;
+		font-style: italic;
+		margin: 0;
+
+		a {
+			color: $text-color;
+		}
+	}
+
+	.comment-form-comment {
+		margin: 1.5em 0 0.75em;
+	}
+
+	.form-allowed-tags {
+		padding: 1.5em;
+		background-color: $light-gray;
+		font-size: 0.9em;
+	}
+
 	/* comment submit button */
-	#submit {}
+	#submit {
+		@extend .blue-btn;
+		float: right;
+		font-size: 1em;
+	}
 
 	/* comment form title */
 	#comment-form-title {
@@ -819,7 +818,7 @@ and more scalable.
 	}
 
 /*********************
-12. SIDEBARS & ASIDES
+SIDEBARS & ASIDES
 *********************/
 
 .sidebar {}
@@ -847,25 +846,23 @@ and more scalable.
 
 	}
 
+	.no-widgets {
+		background-color: $white;
+		padding: 1.5em;
+		text-align: center;
+		border: 1px solid $border-color;
+		border-radius: 2px;
+		margin-bottom: 1.5em;
+	}
+
 /*********************
-13. FOOTER STYLES
+FOOTER STYLES
 *********************/
 
 .footer {
 	clear: both;
-	#inner-footer {
-	}
-	nav {
-		ul.nav {
-			li {
-				a {}
-
-				&:first-child {}
-
-				&:last-child {}
-			}
-		}
-	}
+	background-color: $black;
+	color: $light-gray;
 }
 
 	/*
@@ -889,4 +886,3 @@ and more scalable.
 
 
 	.copyright {}
-
